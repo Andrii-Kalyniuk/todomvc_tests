@@ -1,0 +1,17 @@
+# pyenv
+.python-version
+
+# PyCharm
+*.idea/
+
+# Byte-compiled
+__pycache__/
+
+.pytest_cache
+
+# Environments
+venv/
+.venv/
+
+# selene
+geckodriver.log
