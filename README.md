@@ -75,13 +75,13 @@ Draft Test plan
 
         2. edit 'a' to 'a edited'
 
-        3. complete 'b', 'a edited'
+        3. complete 'a edited'
         4. clear completed
-           assert list: 'c'
+           assert list: 'b', 'c'
 
         5. cancel edit 'c' to 'to be canceled'
 
         6. delete 'c'
-           assert no todos
+           assert list: 'b'
 
     * ...

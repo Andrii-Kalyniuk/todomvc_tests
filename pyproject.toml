@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "todo_mvc_troopjs"
+name = "todomvc_tests"
 version = "0.1.0"
 description = ""
 authors = ["andrii-kalyniuk <v13urnum@gmail.com>"]

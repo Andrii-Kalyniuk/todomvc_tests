@@ -4,11 +4,11 @@ from selene.support.shared import browser
 
 def test_todos_basic_management():
     browser.config.browser_name = 'firefox'
-    is_new_todo_input_live_check = "$._data($('#new-todo').get(0), 'events')" \
-                                   ".hasOwnProperty('keyup')"
 
     # GIVEN open Todomvc
     browser.open('https://todomvc4tasj.herokuapp.com')
+    is_new_todo_input_live_check = "$._data($('#new-todo').get(0), 'events')" \
+                                   ".hasOwnProperty('keyup')"
     browser.wait_until(have.js_returned(True, is_new_todo_input_live_check))
 
     # Add
@@ -26,12 +26,10 @@ def test_todos_basic_management():
     # Complete
     browser.all('#todo-list>li').element_by(have.exact_text('a edited'))\
         .element('.toggle').click()
-    browser.all('#todo-list>li').element_by(have.exact_text('b'))\
-        .element('.toggle').click()
 
     # Clear completed
     browser.element('#clear-completed').click()
-    browser.all('#todo-list>li').should(have.exact_texts('c'))
+    browser.all('#todo-list>li').should(have.exact_texts('b', 'c'))
 
     # Cancel Edit
     browser.all('#todo-list>li').element_by(have.exact_text('c'))\
@@ -42,4 +40,4 @@ def test_todos_basic_management():
     # Delete
     browser.all('#todo-list>li').element_by(have.exact_text('c'))\
         .hover().element('.destroy').click()
-    browser.all('#todo-list>li').should(have.size(0))
+    browser.all('#todo-list>li').should(have.exact_texts('b'))
