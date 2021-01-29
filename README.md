@@ -82,6 +82,6 @@ Draft Test plan
         5. cancel edit 'c' to 'to be canceled'
 
         6. delete 'c'
-           assert list: 'b'
+           assert 'b'
 
     * ...
