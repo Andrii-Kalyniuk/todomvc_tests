@@ -5,11 +5,12 @@ _list = browser.all('#todo-list>li')
 
 
 def visit():
-    is_new_todo_input_alive = (
+    is_todomvc_js_loaded = (
+        "return "
         "$._data($('#new-todo').get(0), 'events').hasOwnProperty('keyup') "
         "&& Object.keys(require.s.contexts._.defined).length === 39")
     browser.open('https://todomvc4tasj.herokuapp.com')
-    browser.wait_until(have.js_returned(True, is_new_todo_input_alive))
+    browser.should(have.js_returned(True, is_todomvc_js_loaded))
 
 
 def add(*todos: str):
