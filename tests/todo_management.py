@@ -1,24 +1,20 @@
-from selene.support.shared import browser
-
-from todomvc_tests.model import todos
+from todomvc_tests import app
 
 
 def test_todos_life_cycle():
-    browser.config.browser_name = 'firefox'
+    app.todomvc.visit()
 
-    todos.visit()
+    app.todomvc.add('a', 'b', 'c')\
+        .should_be('a', 'b', 'c')
 
-    todos.add('a', 'b', 'c')
-    todos.should_be('a', 'b', 'c')
+    app.todomvc.edit('b', 'b edited')
 
-    todos.edit('b', 'b edited')
+    app.todomvc.toggle('b edited')
 
-    todos.toggle('b edited')
+    app.todomvc.clear_completed()\
+        .should_be('a', 'c')
 
-    todos.clear_completed()
-    todos.should_be('a', 'c')
+    app.todomvc.cancel_edit('c', 'c to be canceled')
 
-    todos.cancel_edit('c', 'c to be canceled')
-
-    todos.delete('c')
-    todos.should_be('a')
+    app.todomvc.delete('c')\
+        .should_be('a')
