@@ -7,56 +7,57 @@ Draft Test plan
 ### Features to be tested:
   * UI functionality map:
     - CRUD operations:
-      - add                                  `!!!`
+      - add                                  `!!!` `e2e` `f`
       - delete
         - one
-          - by 'X' button                    `!!!`
+          - by 'X' button                    `!!!` `e2e` `f`
           - by edit to blank                 `.`
         - all completed
-          - by 'Clear-complete'              `!!!`
+          - by 'Clear-complete'              `!!!` `e2e` `f`
       - edit
         - text
           - submit
-            - by Enter                       `!!`
+            - by Enter                       `!!`  `e2e` `f`
             - by outside click               `.`
             - by Tab                         `.`
-          - cancel edit by Esc               `!!!`
+          - cancel edit by Esc               `!!!` `e2e` `f`
         - status
           - complete
-            - one                            `!!`
+            - one                            `!!`  `e2e` `f`
             - all                            `.`
           - activate
-            - one                            `.`
+            - one                            `.`         `f`
             - all                            `.`
     - storage todos
-      - after page refresh                   `!!!`
+      - after page refresh                   `!!!`       `f`
     - filtering
-      - active from                          `!`
+      - active from                          `!`         `f`
         - completed
         - all
       - completed from                       `.`
         - active
         - all
-      - all from                             `!`
+      - all from                             `!`         `f`
         - active
         - completed
-    - active item left counting
-      - increment                            `!`
-      - decrement                            `!`
+    - active items left counting
+      - increment                            `!`         `f`
+      - decrement                            `!`         `f`
       - unchanged                            `.`
   * ...
-  > testing priority marks (ascending) - `. ! !! !!!`
+  > testing priority marks (ascending) - `. ! !! !!!`  
+  > coverage by
+  >  - `e2e` - end-to-end test 
+  >  - `f` - feature test
 
 ### Feature not to be tested
   > Only basic todos management operations (CRUDs) are important
   > for the client's needs, so the detail on the functional map
   > and testing can now be omitted for:
   * todomvc app UI:
-    - storage todos for the current session
     - filtering
       - different variations of transitions
       - and operations per filters
-    - active item left counting
   * ...
 
 ### Environmental needs

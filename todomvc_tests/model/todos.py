@@ -1,4 +1,4 @@
-from selene.support.conditions import have
+from selene.support.conditions import have, be
 from selene.support.shared import browser
 
 
@@ -8,6 +8,8 @@ class Todo:
         self.browser = browser
         self.browser.config.browser_name = browser_name
         self._list = self.browser.all('#todo-list>li')
+        self._active = self._list.filtered_by(have.css_class('active'))
+        self._completed = self._list.filtered_by(have.css_class('completed'))
 
     def visit(self):
         is_todomvc_js_loaded = (
@@ -27,6 +29,22 @@ class Todo:
         self._list.should(have.exact_texts(*todos))
         return self
 
+    def should_be_active(self, *todos):
+        self._active.should(have.exact_texts(*todos))
+        return self
+
+    def should_be_active_count(self, count_of_active: int):
+        self._active.should(have.size(count_of_active))
+        return self
+
+    def should_be_completed(self, *todos):
+        self._completed.should(have.exact_texts(*todos))
+        return self
+
+    def should_be_completed_count(self, count_of_completed: int):
+        self._completed.should(have.size(count_of_completed))
+        return self
+
     def start_editing(self, old_todo: str, new_todo: str):
         self._list.element_by(have.exact_text(old_todo)).double_click()
         return self._list.element_by(have.css_class('editing')) \
@@ -40,16 +58,40 @@ class Todo:
         self.start_editing(old_todo, new_todo).press_escape()
         return self
 
-    def toggle(self, todo: str):
-        self._list.element_by(have.exact_text(todo)).element('.toggle').click()
+    def toggle(self, *todos):
+        for todo in todos:
+            self._list.element_by(have.exact_text(todo))\
+                .element('.toggle').click()
         return self
 
     def clear_completed(self):
         self.browser.element('#clear-completed').click()
         return self
 
-    def delete(self, todo: str):
-        self.browser.element('body').hover()
-        self._list.element_by(have.exact_text(todo)).hover() \
-            .element('.destroy').click()
+    def delete(self, *todos):
+        for todo in todos:
+            self.browser.element('body').hover()
+            self._list.element_by(have.exact_text(todo)).hover()\
+                .element('.destroy').click()
+        return self
+
+    def should_items_left(self, count_of_active: int):
+        self.browser.element('#todo-count strong')\
+            .should(have.exact_text(f'{count_of_active}'))
+        return self
+
+    def filter_active(self):
+        self.browser.element('[href="#/active"]').click()
+        return self
+
+    def filter_completed(self):
+        self.browser.element('[href="#/completed"]').click()
+        return self
+
+    def filter_all(self):
+        self.browser.element('[href="#/"]').click()
+        return self
+
+    def refresh(self):
+        self.browser.driver.refresh()
         return self
