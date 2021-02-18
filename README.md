@@ -24,17 +24,17 @@ Draft Test plan
         - status
           - complete
             - one                            `!!`  `e2e` `f`
-            - all                            `.`
+            - all                            `.`         `f`
           - activate
             - one                            `.`         `f`
-            - all                            `.`
+            - all                            `.`         `f`
     - storage todos
       - after page refresh                   `!!!`       `f`
     - filtering
       - active from                          `!`         `f`
         - completed
         - all
-      - completed from                       `.`
+      - completed from                       `.`         `f`
         - active
         - all
       - all from                             `!`         `f`

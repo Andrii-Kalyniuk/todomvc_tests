@@ -64,6 +64,10 @@ class Todo:
                 .element('.toggle').click()
         return self
 
+    def toggle_all(self):
+        self.browser.element('#toggle-all').click()
+        return self
+
     def clear_completed(self):
         self.browser.element('#clear-completed').click()
         return self

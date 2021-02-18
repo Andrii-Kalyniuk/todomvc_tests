@@ -8,3 +8,4 @@ class App:
 
 
 app = App()
+todomvc = Todo(browser_name='firefox')
