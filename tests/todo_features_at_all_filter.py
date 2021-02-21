@@ -52,6 +52,12 @@ def test_delete():
         .should_be('i').should_items_left(1)
 
 
+def test_delete_by_edit_to_empty():
+    todomvc.visit().add('a', 'b', 'c')\
+        .edit('a', '')\
+        .should_be('b', 'c').should_items_left(2)
+
+
 def test_clear_completed():
     todomvc.visit().add('a', 'b', 'c')\
         .toggle('a', 'c')\

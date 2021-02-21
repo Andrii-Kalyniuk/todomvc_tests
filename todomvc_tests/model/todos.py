@@ -2,7 +2,7 @@ from selene.support.conditions import have, be
 from selene.support.shared import browser
 
 
-class Todo:
+class TodomvcPage:
 
     def __init__(self, browser=browser, browser_name='chrome'):
         self.browser = browser
@@ -47,7 +47,7 @@ class Todo:
 
     def start_editing(self, old_todo: str, new_todo: str):
         self._list.element_by(have.exact_text(old_todo)).double_click()
-        return self._list.element_by(have.css_class('editing')) \
+        return self._list.element_by(have.css_class('editing'))\
             .element('.edit').with_(set_value_by_js=True).set_value(new_todo)
 
     def edit(self, old_todo: str, new_todo: str):

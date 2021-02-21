@@ -11,7 +11,7 @@ Draft Test plan
       - delete
         - one
           - by 'X' button                    `!!!` `e2e` `f`
-          - by edit to blank                 `.`
+          - by edit to blank                 `.`         `f`
         - all completed
           - by 'Clear-complete'              `!!!` `e2e` `f`
       - edit
