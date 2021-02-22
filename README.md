@@ -18,8 +18,9 @@ Draft Test plan
         - text
           - submit
             - by Enter                       `!!`  `e2e` `f`
-            - by outside click               `.`
-            - by Tab                         `.`
+            - by loose focus                 `.`         `f`
+              - by outside click
+              - by Tab
           - cancel edit by Esc               `!!!` `e2e` `f`
         - status
           - complete
