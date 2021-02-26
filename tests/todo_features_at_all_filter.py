@@ -1,4 +1,4 @@
-from todomvc_tests import todomvc
+from todomvc_tests.model import todomvc
 
 
 def test_add_first_one():
@@ -163,80 +163,6 @@ def test_items_left_count_increment():
     todomvc.add('c').toggle('b')
 
     todomvc.should_have_items_left(3)
-
-
-def test_filter_active_from_all():
-    todomvc.visit()
-    todomvc.add('a', 'b', 'c')
-    todomvc.toggle('b', 'c')
-
-    todomvc.filter_active()
-
-    todomvc.should_have('a')
-    todomvc.should_have_items_left(1)
-
-
-def test_filter_active_from_completed():
-    todomvc.visit()
-    todomvc.add('a', 'b', 'c')
-    todomvc.toggle('b', 'c')
-    todomvc.filter_completed()
-
-    todomvc.filter_active()
-
-    todomvc.should_have('a')
-    todomvc.should_have_items_left(1)
-
-
-def test_filter_completed_from_all():
-    todomvc.visit()
-    todomvc.add('a', 'b', 'c')
-    todomvc.toggle('b', 'c')
-
-    todomvc.filter_completed()
-
-    todomvc.should_have('b', 'c')
-    todomvc.should_have_items_left(1)
-
-
-def test_filter_completed_from_active():
-    todomvc.visit()
-    todomvc.add('a', 'b', 'c')
-    todomvc.toggle('b', 'c')
-    todomvc.filter_active()
-
-    todomvc.filter_completed()
-
-    todomvc.should_have('b', 'c')
-    todomvc.should_have_items_left(1)
-
-
-def test_filter_all_from_completed():
-    todomvc.visit()
-    todomvc.add('a', 'b', 'c')
-    todomvc.toggle('b', 'c')
-    todomvc.filter_completed()
-
-    todomvc.filter_all()
-
-    todomvc.should_have('a', 'b', 'c')
-    todomvc.should_have_active('a')
-    todomvc.should_have_items_left(1)
-    todomvc.should_have_completed('b', 'c')
-
-
-def test_filter_all_from_active():
-    todomvc.visit()
-    todomvc.add('a', 'b', 'c')
-    todomvc.toggle('b', 'c')
-    todomvc.filter_active()
-
-    todomvc.filter_all()
-
-    todomvc.should_have('a', 'b', 'c')
-    todomvc.should_have_active('a')
-    todomvc.should_have_items_left(1)
-    todomvc.should_have_completed('b', 'c')
 
 
 def test_keep_storage_after_page_refresh():
