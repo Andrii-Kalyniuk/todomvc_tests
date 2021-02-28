@@ -99,18 +99,6 @@ class TodomvcPage:
                 .element('.destroy').click()
         return self
 
-    def filter_active(self):
-        self.browser.element('[href="#/active"]').click()
-        return self
-
-    def filter_completed(self):
-        self.browser.element('[href="#/completed"]').click()
-        return self
-
-    def filter_all(self):
-        self.browser.element('[href="#/"]').click()
-        return self
-
     def refresh(self):
         self.browser.driver.refresh()
         return self

@@ -6,5 +6,3 @@ from selene.support.shared import browser
 def clear_storage():
     yield
     browser.clear_local_storage()
-
-
