@@ -18,8 +18,9 @@ Draft Test plan
         - text
           - submit
             - by Enter                       `!!`  `e2e` `f`
-            - by outside click               `.`
-            - by Tab                         `.`
+            - by loose focus                 `.`         `f`
+              - by outside click
+              - by Tab
           - cancel edit by Esc               `!!!` `e2e` `f`
         - status
           - complete
@@ -31,13 +32,13 @@ Draft Test plan
     - storage todos
       - after page refresh                   `!!!`       `f`
     - filtering
-      - active from                          `!`         `f`
+      - active from                          `!` 
         - completed
         - all
-      - completed from                       `.`         `f`
+      - completed from                       `.`
         - active
         - all
-      - all from                             `!`         `f`
+      - all from                             `!`
         - active
         - completed
     - active items left counting
