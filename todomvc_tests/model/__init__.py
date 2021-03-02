@@ -1,11 +1,11 @@
-from todomvc_tests.model.todos import TodomvcPage
+from todomvc_tests.model.todos import TodoMVCPage
 
 
 class App:
 
     def __init__(self):
-        self.todomvc = TodomvcPage(browser_name='firefox')
+        self.todomvc = TodoMVCPage(browser_name='firefox')
 
 
 app = App()
-todomvc = TodomvcPage(browser_name='firefox')
+todomvc = TodoMVCPage(browser_name='firefox')

@@ -2,7 +2,7 @@ from selene.support.conditions import have, be
 from selene.support.shared import browser
 
 
-class TodomvcPage:
+class TodoMVCPage:
 
     def __init__(self, browser=browser, browser_name='chrome'):
         self.browser = browser

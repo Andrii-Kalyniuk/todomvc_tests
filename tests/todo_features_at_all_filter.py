@@ -76,6 +76,19 @@ def test_complete_all():
     todomvc.should_have_clear_completed_visible()
 
 
+def test_complete_all_with_few_competed():
+    todomvc.visit()
+    todomvc.add('a', 'b', 'c', 'e')
+    todomvc.toggle('b', 'e')
+
+    todomvc.toggle_all()
+
+    todomvc.should_have_completed('a', 'b', 'c', 'e')
+    todomvc.should_have_active()
+    todomvc.should_have_items_left(0)
+    todomvc.should_have_clear_completed_visible()
+
+
 def test_activate():
     todomvc.visit()
     todomvc.add('a', 'b', 'c', 'd', 'e')
