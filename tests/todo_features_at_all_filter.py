@@ -1,4 +1,5 @@
 from todomvc_tests.model import todomvc
+from todomvc_tests.model.todos import Todo
 
 
 def test_add_first_one():
@@ -103,13 +104,26 @@ def test_activate():
     todomvc.should_have_clear_completed_hidden()
 
 
-def test_activate_vs_js_precondition():
+def test_activate_vs_str_args():
+    todomvc.given_opened_with('a', 'b', 'c', 'd', 'e')
+    todomvc.toggle('a', 'c', 'e')
+
+    todomvc.toggle('a', 'c', 'e')
+
+    todomvc.should_have_active('a', 'b', 'c', 'd', 'e')
+    todomvc.should_have_completed_count(0)
+    todomvc.should_have_completed()
+    todomvc.should_have_items_left(5)
+    todomvc.should_have_clear_completed_hidden()
+
+
+def test_activate_vs_js_precondition_and_oop():
     todomvc.given_opened_with(
-        {'completed': True, 'title': 'a'},
-        {'completed': False, 'title': 'b'},
-        {'completed': True, 'title': 'c'},
-        {'completed': False, 'title': 'd'},
-        {'completed': True, 'title': 'e'}
+        Todo('a', completed=True),
+        Todo('b'),
+        Todo('c', completed=True),
+        Todo('d'),
+        Todo('e', completed=True),
     )
 
     todomvc.toggle('a', 'c', 'e')

@@ -2,6 +2,17 @@ from selene.support.conditions import have, be
 from selene.support.shared import browser
 
 
+class Todo(object):
+    def __init__(self, title=None, completed=False):
+        self.title = title
+        self.completed = completed
+
+    def __str__(self):
+        completed_str = '{' + f"'completed':{str(self.completed).lower()},"
+        title_str = f"'title':'{str(self.title)}'" + '}'
+        return (completed_str + title_str).replace("'", '\"')
+
+
 class TodoMVCPage:
 
     def __init__(self, browser=browser, browser_name='chrome'):
@@ -57,13 +68,13 @@ class TodoMVCPage:
         return self
 
     def should_have_items_left(self, count_of_active: int):
-        self.browser.element('#todo-count strong')\
+        self.browser.element('#todo-count strong') \
             .should(have.exact_text(f'{count_of_active}'))
         return self
 
     def start_editing(self, old_todo: str, new_todo: str):
         self._list.element_by(have.exact_text(old_todo)).double_click()
-        return self._list.element_by(have.css_class('editing'))\
+        return self._list.element_by(have.css_class('editing')) \
             .element('.edit').with_(set_value_by_js=True).set_value(new_todo)
 
     def edit(self, old_todo: str, new_todo: str):
@@ -80,7 +91,7 @@ class TodoMVCPage:
 
     def toggle(self, *todos):
         for todo in todos:
-            self._list.element_by(have.exact_text(todo))\
+            self._list.element_by(have.exact_text(todo)) \
                 .element('.toggle').click()
         return self
 
@@ -95,7 +106,7 @@ class TodoMVCPage:
     def delete(self, *todos):
         for todo in todos:
             self.browser.element('body').hover()
-            self._list.element_by(have.exact_text(todo)).hover()\
+            self._list.element_by(have.exact_text(todo)).hover() \
                 .element('.destroy').click()
         return self
 
@@ -104,24 +115,15 @@ class TodoMVCPage:
         return self
 
     def given_opened_with(self, *todos):
-
-        def json_dumps(todos):
-            todos_list = []
-            for todo in todos:
-                completed_str = '{' + f"'completed':" \
-                                      f"{str(todo.get('completed')).lower()},"
-                title_str = f"'title':'{str(todo.get('title'))}'" + '},'
-                todos_list.append(
-                    (completed_str + title_str).replace("'", '\"'))
-            return ''.join(todos_list)[:-1]
-
+        todos = [Todo(arg) if isinstance(arg, str) else arg for arg in todos]
         self.visit()
-        local_storage_str_json = json_dumps(todos)
+        local_storage_str_json = ','.join([str(todo) for todo in todos])
+        # TODO: why f-string don't work here
         self.browser.driver.execute_script(
             '''
             localStorage["todos-troopjs"]="[null,{}]".replace('{}', arguments[0]);
             ''',
             local_storage_str_json
         )
-        self.refresh()
+        self.browser.driver.refresh()
         return self
