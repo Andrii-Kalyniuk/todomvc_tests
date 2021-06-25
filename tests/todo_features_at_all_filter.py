@@ -103,6 +103,24 @@ def test_activate():
     todomvc.should_have_clear_completed_hidden()
 
 
+def test_activate_vs_js_precondition():
+    todomvc.given_opened_with(
+        {'completed': True, 'title': 'a'},
+        {'completed': False, 'title': 'b'},
+        {'completed': True, 'title': 'c'},
+        {'completed': False, 'title': 'd'},
+        {'completed': True, 'title': 'e'}
+    )
+
+    todomvc.toggle('a', 'c', 'e')
+
+    todomvc.should_have_active('a', 'b', 'c', 'd', 'e')
+    todomvc.should_have_completed_count(0)
+    todomvc.should_have_completed()
+    todomvc.should_have_items_left(5)
+    todomvc.should_have_clear_completed_hidden()
+
+
 def test_activate_all():
     todomvc.visit()
     todomvc.add('a', 'b', 'c')

@@ -102,3 +102,26 @@ class TodoMVCPage:
     def refresh(self):
         self.browser.driver.refresh()
         return self
+
+    def given_opened_with(self, *todos):
+
+        def json_dumps(todos):
+            todos_list = []
+            for todo in todos:
+                completed_str = '{' + f"'completed':" \
+                                      f"{str(todo.get('completed')).lower()},"
+                title_str = f"'title':'{str(todo.get('title'))}'" + '},'
+                todos_list.append(
+                    (completed_str + title_str).replace("'", '\"'))
+            return ''.join(todos_list)[:-1]
+
+        self.visit()
+        local_storage_str_json = json_dumps(todos)
+        self.browser.driver.execute_script(
+            '''
+            localStorage["todos-troopjs"]="[null,{}]".replace('{}', arguments[0]);
+            ''',
+            local_storage_str_json
+        )
+        self.refresh()
+        return self

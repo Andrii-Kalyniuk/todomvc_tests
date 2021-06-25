@@ -8,4 +8,5 @@ class App:
 
 
 app = App()
-todomvc = TodoMVCPage(browser_name='firefox')
+# todomvc = TodoMVCPage(browser_name='firefox')
+todomvc = TodoMVCPage(browser_name='chrome')
