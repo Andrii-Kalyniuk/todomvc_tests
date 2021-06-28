@@ -15,3 +15,9 @@ venv/
 
 # selene
 geckodriver.log
+
+# allure
+reports/
+
+# context
+config.local.env

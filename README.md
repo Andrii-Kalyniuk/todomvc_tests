@@ -32,7 +32,7 @@ Draft Test plan
     - storage todos
       - after page refresh                   `!!!`       `f`
     - filtering
-      - active from                          `!` 
+      - active from                          `!`
         - completed
         - all
       - completed from                       `.`

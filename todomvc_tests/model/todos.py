@@ -4,9 +4,8 @@ from selene.support.shared import browser
 
 class TodoMVCPage:
 
-    def __init__(self, browser=browser, browser_name='chrome'):
+    def __init__(self, browser=browser):
         self.browser = browser
-        self.browser.config.browser_name = browser_name
         self._list = self.browser.all('#todo-list>li')
         self._active = self._list.filtered_by(have.css_class('active'))
         self._completed = self._list.filtered_by(have.css_class('completed'))
