@@ -30,3 +30,28 @@ services:
     # - "8090:8080"
       - "8080:8080"
     command: ["--selenoid-uri", "http://selenoid:4444"]
+
+  jenkins:
+    build: "$PWD/etc/jenkins_with_pyenv_poetry"
+    image: jenkins-with-pyenv-n-poetry
+    container_name: jenkins
+    restart: always
+    volumes:
+      # we don't keep here something like
+      # - "/opt/jenkins:/var/jenkins_home"
+      # ... because we don't know
+      # ... whether actual host filesystem has its /opt/jenkins
+      # ... moreover, if has –
+      # ... its content will overwrite everything
+      # ... in container's /var/jenkins_home
+      # ... like init.groovy.d
+      # ... that in current impl of this container are pre-installed there
+      - "/var/jenkins_home"
+      # -> while this will map container's /var/jenkins_home to some host's dir
+      # ... like /var/lib/docker/volumes/8e0b3a9d5c544b63a0bbaa788a250e6f/_data/
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    ports:  # if 8080 is already used on your host machine
+      # then change it to something else, like
+      # - "8088:8080"
+      - 8088:8080
+      - 50000:50000
