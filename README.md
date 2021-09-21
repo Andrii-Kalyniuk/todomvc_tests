@@ -87,3 +87,21 @@ Draft Test plan
            assert 'a'
 
     * ...
+
+
+## Jenkins set up example:
+Create new Freestyle project
+  [v] This project is parameterized
+Source Code Management > Git:
+  Repository URL:
+    https://github.com/Andrii-Kalyniuk/todomvc_tests.git
+  Branch Specifier:
+    */full-setup
+Build Triggers > Poll SCM > Schedule:
+  H/1 * * * *
+Build > Execute shell:
+'''bash
+pyenv install --skip-existing
+poetry install --no-interaction
+env -S 'browser_name=chrome remote_url=http://127.0.0.1:4444/wd/hub headless=false' pytest -n auto tests/test_todo_management.py --alluredir=reports
+'''
